@@ -194,6 +194,24 @@ def evaluate_reference_genome(ds: PreprocessDataset):
     else:
         raise RuntimeError("Requires custom genome input")
 
+def stage_additional_fasta(ds):
+    """
+    fasta and additional_fasta using Cirro's References feature results in a
+    filename collision in the nf-core/rnaseq pipeline. Staging additional_fasta
+    locally in order to provide a differently named local path.
+    """
+
+    additional_fasta_s3 = S3Path(ds.params["additional_fasta"])
+    s3 = boto3.client('s3')
+    additional_fasta_path = './additional_fasta.fasta'
+
+    s3.download_file(
+        Bucket=additional_fasta_s3.bucket,
+        Key=additional_fasta_s3.key,
+        Filename=additional_fasta_path
+    )
+
+    ds.add_param("additional_fasta", additional_fasta_path, overwrite=True)
 
 if __name__ == "__main__":
 
@@ -206,3 +224,6 @@ if __name__ == "__main__":
     ds.logger.info(f"Wrote out {manifest.shape[0]:,} lines to manifest.csv")
 
     evaluate_reference_genome(ds)
+    
+    if "additional_fasta" in ds.params:
+        stage_additional_fasta(ds)
