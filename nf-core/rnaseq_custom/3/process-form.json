@@ -68,6 +68,11 @@
             "description": "FASTA file to concatenate to reference genome FASTA. Can be added from the Pipelines menu with '+ Add Reference'",
             "file": "**/genome_fasta/**/genome.fasta",
             "pathType": "references"
+          },
+          "salmon_index": {
+            "type": "string",
+            "title": "Select custom Salmon index",
+            "description": "S3 URI to directory or tar.gz archive for pre-built Salmon index"
           }
         }
       },

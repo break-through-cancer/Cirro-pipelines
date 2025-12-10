@@ -5,6 +5,7 @@
     "gtf": "$.params.dataset.paramJson.custom_genome.gtf",
     "gencode": "$.params.dataset.paramJson.custom_genome.gencode",
     "additional_fasta": "$.params.dataset.paramJson.custom_genome.additional_fasta",
+    "salmon_index": "$.params.dataset.paramJson.custom_genome.salmon_index",
     "compiled_dataset": "$.params.dataset.paramJson.compiled_custom_genome.dataset",
     "igenomes_base": "s3://pubweb-references/igenomes",
     "outdir": "$.params.dataset.s3|/data/",
