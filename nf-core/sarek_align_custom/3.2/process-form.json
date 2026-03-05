@@ -1,0 +1,135 @@
+{
+  "ui": {
+    "read_trimming_options": {
+      "trim_fastq": {
+        "ui:widget": "radio"
+      }
+    }
+  },
+  "form": {
+    "title": "Align Reads (nf-core/sarek)",
+    "description": "Perform read alignment, mark duplicates, and base recalibration.",
+    "type": "object",
+    "properties": {
+      "workflow_version": {
+        "type": "string",
+        "title": "Workflow Version",
+        "description": "Select the specific version of nf-core/sarek used for analysis",
+        "enum": [
+          "3.1",
+          "3.1.1",
+          "3.1.2",
+          "3.2.3",
+          "3.3.2",
+          "3.4.4",
+          "3.5.1",
+          "3.6.0",
+          "3.8.1"
+        ],
+        "default": "3.8.1"
+      },
+      "analysis_type": {
+        "title": "Experimental Design",
+        "description": "Details on the reference genome and optional target panel used to generate sequences.",
+        "type": "object",
+        "required": ["genome", "wes"],
+        "properties": {
+          "fasta": {
+            "type": "string",
+            "title": "Select Reference Genome (FASTA)",
+            "description": "Reference genomes can be added from the Pipelines menu with '+ Add Reference'",
+            "file": "**/genome_fasta/**/genome.fasta",
+            "pathType": "references"
+          },
+          "wes": {
+            "title": "Whole Exome/Targeted Gene Panel Assay",
+            "description": "Please indicate if your data was generated using a capture kit.",
+            "type": "boolean",
+            "default": false
+          },
+          "intervals": {
+            "title": "Genomic intervals",
+            "description": "Target bed file in case of whole exome or targeted sequencing or intervals file for parallelization.",
+            "type": "string",
+            "pathType": "references",
+            "file": "**/genome_bed/**/regions.bed"
+          }
+        }
+      },
+      "read_trimming_options": {
+        "title": "Read Trimming Options",
+        "description": "Parameters for performing adapter and read trimming using Trim-Galore.",
+        "type": "object",
+        "properties": {
+          "trim_fastq": {
+            "type": "boolean",
+            "title": "Trim reads using Trim-Galore?",
+            "default": false
+          }
+        },
+        "dependencies": {
+          "trim_fastq": {
+            "oneOf": [
+              {
+                "properties": {
+                  "trim_fastq": {
+                    "enum": [false]
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "trim_fastq": {
+                    "enum": [true]
+                  },
+                  "clip_r1": {
+                    "type": "integer",
+                    "title": "Clip R1",
+                    "description": "Instructs Trim Galore to remove bp from the 5' end of read 1 (or single-end reads)."
+                  },
+                  "clip_r2": {
+                    "type": "integer",
+                    "title": "Clip R2",
+                    "description": "Instructs Trim Galore to remove bp from the 5' end of read 2 (paired-end reads only)."
+                  },
+                  "three_prime_clip_r1": {
+                    "type": "integer",
+                    "title": "Three Prime Clip R1",
+                    "description": "Instructs Trim Galore to remove bp from the 3' end of read 1 AFTER adapter/quality trimming has been performed."
+                  },
+                  "three_prime_clip_r2": {
+                    "type": "integer",
+                    "title": "Three Prime Clip R2",
+                    "description": "Instructs Trim Galore to remove bp from the 3' end of read 2 AFTER adapter/quality trimming has been performed."
+                  },
+                  "trim_nextseq": {
+                    "type": "boolean",
+                    "title": "Trim NextSeq",
+                    "description": "DetectS polyG in read tails and trim them. Corresponds to the FastP flag `--trim_poly_g.`"
+                  },
+                  "save_trimmed": {
+                    "type": "boolean",
+                    "title": "Save the trimmed FastQ files in the results directory?",
+                    "default": false
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "advanced_options": {
+        "type": "object",
+        "title": "Advanced Options",
+        "properties": {
+          "optical_duplicate_pixel_distance": {
+            "type": "integer",
+            "title": "MarkDuplicates - Optical Duplicate Pixel Distance",
+            "description": "The `--OPTICAL_DUPLICATE_PIXEL_DISTANCE` parameter is used by MarkDuplicates to set the maximum offset between two duplicate clusters in pixels for them to be considered optical duplicates. A value of 100 is generally appropriate for unpatterned Illumina flowcells and 250 is appropriate for patterned Illumina flow cells.",
+            "default": 100
+          }
+        }
+      }
+    }
+  }
+}
