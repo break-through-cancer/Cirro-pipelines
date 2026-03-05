@@ -1,4 +1,5 @@
 {
+  "fasta": "$.params.dataset.paramJson.analysis_type.fasta",
   "wes": "$.params.dataset.paramJson.analysis_type.wes",
   "trim_fastq": "$.params.dataset.paramJson.read_trimming_options.trim_fastq",
   "clip_r1": "$.params.dataset.paramJson.read_trimming_options.clip_r1",
