@@ -24,6 +24,27 @@
             "file": "**/genome_fasta/**/genome.fasta",
             "pathType": "references"
           },
+          "dbsnp": {
+            "type": "string",
+            "title": "Select dbsnp VCF",
+            "description": "Reference genomes can be added from the Pipelines menu with '+ Add Reference'",
+            "file": "**/germline_resource/**/germline_resource.vcf.gz",
+            "pathType": "references"
+          },
+          "known_indels": {
+            "type": "string",
+            "title": "Select known indels VCF",
+            "description": "Reference genomes can be added from the Pipelines menu with '+ Add Reference'",
+            "file": "**/germline_resource/**/germline_resource.vcf.gz",
+            "pathType": "references"
+          },
+          "germline_resource": {
+            "type": "string",
+            "title": "Select Germline Resource (Mutect2)",
+            "description": "Reference genomes can be added from the Pipelines menu with '+ Add Reference'",
+            "file": "**/germline_resource/**/germline_resource.vcf.gz",
+            "pathType": "references"
+          },
           "wes": {
             "title": "Whole Exome/Targeted Gene Panel Assay",
             "description": "Please indicate if your data was generated using a capture kit.",
