@@ -1,9 +1,12 @@
 {
   "fasta": "$.params.dataset.paramJson.analysis_type.fasta",
+  "bwa": "$.params.dataset.paramJson.analysis_type.bwa",
+  "bwamem2": "$.params.dataset.paramJson.analysis_type.bwamem2|/data",
   "dbsnp": "$.params.dataset.paramJson.analysis_type.dbsnp",
   "known_indels": "$.params.dataset.paramJson.analysis_type.known_indels",
   "germline_resource": "$.params.dataset.paramJson.analysis_type.germline_resource",
   "wes": "$.params.dataset.paramJson.analysis_type.wes",
+  "aligner": "$.params.dataset.paramJson.preprocessing.aligner",
   "trim_fastq": "$.params.dataset.paramJson.read_trimming_options.trim_fastq",
   "clip_r1": "$.params.dataset.paramJson.read_trimming_options.clip_r1",
   "clip_r2": "$.params.dataset.paramJson.read_trimming_options.clip_r2",

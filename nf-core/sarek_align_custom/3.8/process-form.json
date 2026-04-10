@@ -15,7 +15,10 @@
         "title": "Experimental Design",
         "description": "Details on the reference genome and optional target panel used to generate sequences.",
         "type": "object",
-        "required": ["fasta", "wes"],
+        "required": [
+          "fasta",
+          "wes"
+        ],
         "properties": {
           "fasta": {
             "type": "string",
@@ -23,6 +26,22 @@
             "description": "Reference genomes can be added from the Pipelines menu with '+ Add Reference'",
             "file": "**/genome_fasta/**/genome.fasta",
             "pathType": "references"
+          },
+          "bwa": {
+            "type": "string",
+            "title": "Select BWA mem indices",
+            "description": "Reference genomes can be added from the Pipelines menu with '+ Add Reference'",
+            "file": "**/bwa_genome/**/",
+            "pathType": "references"
+          },
+          "bwamem2": {
+            "type": "string",
+            "title": "Select BWA-MEM2 indices",
+            "description": "Pre-built BWA-MEM2 index dataset",
+            "pathType": "dataset",
+            "process": [
+              "genome_bwa-mem2_index"
+            ]
           },
           "dbsnp": {
             "type": "string",
@@ -60,6 +79,18 @@
           }
         }
       },
+      "preprocessing": {
+        "aligner": {
+          "type": "string",
+          "title": "Select aligner",
+          "description": "Specify aligner to be used to map reads to reference genome.",
+          "default": "bwa-mem2",
+          "enum": [
+            "bwa-mem",
+            "bwa-mem2"
+          ]
+        }
+      },
       "read_trimming_options": {
         "title": "Read Trimming Options",
         "description": "Parameters for performing adapter and read trimming using Trim-Galore.",
@@ -77,14 +108,18 @@
               {
                 "properties": {
                   "trim_fastq": {
-                    "enum": [false]
+                    "enum": [
+                      false
+                    ]
                   }
                 }
               },
               {
                 "properties": {
                   "trim_fastq": {
-                    "enum": [true]
+                    "enum": [
+                      true
+                    ]
                   },
                   "clip_r1": {
                     "type": "integer",
