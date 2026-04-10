@@ -80,16 +80,21 @@
         }
       },
       "preprocessing": {
-        "aligner": {
-          "type": "string",
-          "title": "Select aligner",
-          "description": "Specify aligner to be used to map reads to reference genome.",
-          "default": "bwa-mem2",
-          "enum": [
-            "bwa-mem",
-            "bwa-mem2"
-          ]
-        }
+        "title": "Preprocessing",
+        "description": "Preprocessing tools",
+        "type": "object",
+        "properties": {
+          "aligner": {
+            "type": "string",
+            "title": "Select aligner",
+            "description": "Specify aligner to be used to map reads to reference genome.",
+            "default": "bwa-mem2",
+            "enum": [
+              "bwa-mem",
+              "bwa-mem2"
+            ]
+          }
+        },
       },
       "read_trimming_options": {
         "title": "Read Trimming Options",
