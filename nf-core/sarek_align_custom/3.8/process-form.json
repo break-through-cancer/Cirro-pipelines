@@ -94,7 +94,7 @@
               "bwa-mem2"
             ]
           }
-        },
+        }
       },
       "read_trimming_options": {
         "title": "Read Trimming Options",
